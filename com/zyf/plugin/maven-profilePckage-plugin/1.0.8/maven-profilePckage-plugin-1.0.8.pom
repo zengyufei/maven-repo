@@ -80,6 +80,7 @@
                     <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory><!-- 本地 jar 地址 -->
                     <branch>refs/heads/master</branch><!-- 分支 -->
                     <merge>true</merge>
+                    <force>true</force>
                     <includes>
                         <include>**/*</include>
                     </includes>
