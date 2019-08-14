@@ -13,8 +13,18 @@
 
     <modules>
         <module>test-starter</module>
-        <module>repeatedly-read-request-filter-spring-boot-starter</module>
+        <module>base-spring-boot-starter</module>
+        <module>cors-spring-boot-starter</module>
+        <module>enum-converter-spring-boot-starter</module>
+        <module>fastjson-spring-boot-starter</module>
+        <module>global-exception-spring-boot-starter</module>
+        <module>lazy-spring-boot-starter</module>
+        <module>mybatis-plus-spring-boot-starter</module>
+        <module>p6spy-spring-boot-starter</module>
         <module>show-life-spring-boot-starter</module>
+        <module>xss-filter-spring-boot-starter</module>
+        <module>swagger-spring-boot-starter</module>
+        <!--<module>test-starter-run</module>-->
     </modules>
 
     <properties>
@@ -69,64 +79,36 @@
 
     </dependencies>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>2.0.0.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-autoconfigure</artifactId>
+                <version>2.0.0.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-configuration-processor</artifactId>
+                <version>2.0.0.RELEASE</version>
+                <optional>true</optional>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>com.github.github</groupId>
-                <artifactId>site-maven-plugin</artifactId>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
             </plugin>
         </plugins>
-
-
         <pluginManagement>
             <plugins>
-
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.8.1</version>
-                    <configuration>
-                        <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
-                    </configuration>
-                </plugin>
-
-                <plugin>
-                    <groupId>com.github.github</groupId>
-                    <artifactId>site-maven-plugin</artifactId>
-                    <version>0.12</version>
-                    <configuration>
-                        <message>Maven artifacts for ${project.version}</message>
-                        <noJekyll>true</noJekyll>
-                        <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory><!-- 本地 jar 地址 -->
-                        <branch>refs/heads/master</branch><!-- 分支 -->
-                        <merge>true</merge>
-                        <force>true</force>
-                        <includes>
-                            <include>**/*</include>
-                        </includes>
-                        <repositoryName>maven-repo</repositoryName><!-- 对应 github 上创建的仓库名称 name-->
-                        <repositoryOwner>zengyufei</repositoryOwner><!--github 仓库所有者 -->
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>site</goal>
-                            </goals>
-                            <phase>deploy</phase>
-                        </execution>
-                    </executions>
-                </plugin>
-
-
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
@@ -178,6 +160,107 @@
             </snapshots>
         </repository>
     </repositories>
+
+    <!-- 环境变量 -->
+    <profiles>
+        <profile>
+            <id>local</id>
+            <activation>
+                <!-- 默认环境变量 -->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profile.id>local</profile.id>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                    </plugin>
+                </plugins>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-deploy-plugin</artifactId>
+                            <version>2.8.1</version>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+            <distributionManagement>
+                <repository>
+                    <id>nexus-releases</id>
+                    <url>http://svn.corsyn.com:8081/nexus/content/repositories/releases/</url>
+                </repository>
+                <snapshotRepository>
+                    <id>nexus-snapshot</id>
+                    <url>http://svn.corsyn.com:8081/nexus/content/repositories/snapshots/</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profile.id>dev</profile.id>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.github.github</groupId>
+                        <artifactId>site-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+                <pluginManagement>
+                    <plugins>
+
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-deploy-plugin</artifactId>
+                            <version>2.8.1</version>
+                            <configuration>
+                                <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
+                            </configuration>
+                        </plugin>
+
+                        <plugin>
+                            <groupId>com.github.github</groupId>
+                            <artifactId>site-maven-plugin</artifactId>
+                            <version>0.12</version>
+                            <configuration>
+                                <message>Maven artifacts for ${project.version}</message>
+                                <noJekyll>true</noJekyll>
+                                <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory><!-- 本地 jar 地址 -->
+                                <branch>refs/heads/master</branch><!-- 分支 -->
+                                <merge>true</merge>
+                                <force>true</force>
+                                <includes>
+                                    <include>**/*</include>
+                                </includes>
+                                <repositoryName>maven-repo</repositoryName><!-- 对应 github 上创建的仓库名称 name-->
+                                <repositoryOwner>zengyufei</repositoryOwner><!--github 仓库所有者 -->
+                            </configuration>
+                            <executions>
+                                <execution>
+                                    <goals>
+                                        <goal>site</goal>
+                                    </goals>
+                                    <phase>deploy</phase>
+                                </execution>
+                            </executions>
+                        </plugin>
+
+                    </plugins>
+                </pluginManagement>
+            </build>
+
+        </profile>
+    </profiles>
 
 
 </project>
