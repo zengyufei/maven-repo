@@ -12,19 +12,19 @@
     <url>http://maven.apache.org</url>
 
     <modules>
-        <module>test-starter</module>
-        <module>base-spring-boot-starter</module>
         <module>cors-spring-boot-starter</module>
         <module>enum-converter-spring-boot-starter</module>
         <module>fastjson-spring-boot-starter</module>
         <module>global-exception-spring-boot-starter</module>
         <module>lazy-spring-boot-starter</module>
+        <module>log-track-spring-boot-starter</module>
         <module>mybatis-plus-spring-boot-starter</module>
         <module>p6spy-spring-boot-starter</module>
         <module>show-life-spring-boot-starter</module>
-        <module>xss-filter-spring-boot-starter</module>
         <module>swagger-spring-boot-starter</module>
+        <module>test-starter</module>
         <!--<module>test-starter-run</module>-->
+        <module>xss-filter-spring-boot-starter</module>
     </modules>
 
     <properties>
@@ -83,19 +83,10 @@
         <dependencies>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
+                <artifactId>spring-boot-dependencies</artifactId>
                 <version>2.0.0.RELEASE</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-autoconfigure</artifactId>
-                <version>2.0.0.RELEASE</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-configuration-processor</artifactId>
-                <version>2.0.0.RELEASE</version>
-                <optional>true</optional>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -164,13 +155,13 @@
     <!-- 环境变量 -->
     <profiles>
         <profile>
-            <id>local</id>
+            <id>private</id>
             <activation>
                 <!-- 默认环境变量 -->
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <profile.id>local</profile.id>
+                <profile.id>private</profile.id>
             </properties>
             <build>
                 <plugins>
@@ -201,9 +192,9 @@
             </distributionManagement>
         </profile>
         <profile>
-            <id>dev</id>
+            <id>git</id>
             <properties>
-                <profile.id>dev</profile.id>
+                <profile.id>git</profile.id>
             </properties>
             <build>
                 <plugins>
