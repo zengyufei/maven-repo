@@ -12,10 +12,12 @@
     <url>http://maven.apache.org</url>
 
     <modules>
+        <module>zyfUtil-base</module>
         <module>zyfUtil-bus</module>
         <module>zyfUtil-mockMvcUtil</module>
         <module>zyfUtil-modelmapper</module>
         <module>zyfUtil-requestWrapper</module>
+        <module>zyfUtil-responseUtil</module>
         <module>zyfUtil-springProfile</module>
         <module>zyfUtil-squirrel</module>
         <module>zyfUtil-stateMachine</module>
@@ -63,6 +65,12 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- 日志组件 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.24</version>
+        </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
