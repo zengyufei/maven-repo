@@ -30,10 +30,9 @@
     </properties>
 
     <dependencies>
-
         <dependency>
-            <groupId>com.zyf.boot</groupId>
-            <artifactId>base-spring-boot-starter</artifactId>
+            <groupId>com.zyf.util</groupId>
+            <artifactId>zyfUtil-base</artifactId>
             <version>1.0.0</version>
         </dependency>
 
