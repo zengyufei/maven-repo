@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>com.zyf</groupId>
+  <artifactId>util</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20241015.040525</timestamp>
+      <buildNumber>5</buildNumber>
+    </snapshot>
+    <lastUpdated>20241015040525</lastUpdated>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>jar</extension>
+        <value>1.0-20241015.040525-5</value>
+        <updated>20241015040525</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>1.0-20241015.040525-5</value>
+        <updated>20241015040525</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+</metadata>
